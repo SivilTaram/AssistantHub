@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% block title %}排行榜{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+        thead th {
+            background: #4A75E6;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5em;
+            text-align: center;
+            line-height: 2em;
+            font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif;
+        }
+
+        .beautiful-font {
+            font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+            font-size: 2em;
+        }
+
+        table,
+        table th {
+            text-align: center;
+        }
+
+        .score{
+            vertical-align: middle !important;
+            color:darkgrey;
+            font-weight:bold;
+            font-size:1.7em;
+            font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+        }
+
+        .gold-color{
+            color: #F44336;
+        }
+        .silver-color{
+            color: #1296db;
+        }
+        .meta-color{
+            color: #F2C36B;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div style="height: 100%;overflow: auto;-webkit-overflow-scrolling: touch;">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>排名</th>
+                <th>用户</th>
+                <th>积分</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for display in display_list %}
+                <tr>
+                    <th scope="row" class="beautiful-font">
+                        {% if loop.index == 1 %}
+                            <img class="img-circle" style="width:60px;height:60px" src="/static/imgs/gold.png"></img>
+                        {% elif loop.index == 2 %}
+                            <img class="img-circle" style="width:60px;height:60px" src="/static/imgs/silver.png"></img>
+                        {% elif loop.index == 3 %}
+                            <img class="img-circle" style="width:60px;height:60px" src="/static/imgs/bronze.png"></img>
+                        {% else %}
+                            {{ loop.index }}
+                        {% endif %}
+                    </th>
+                    <td style="font-weight: bold;font-size: 1.25em;vertical-align: middle;font-family: Amaranth; max-width: 6em;">
+                        <img class="img-circle" style="width:50px;height:50px" src="{{ display.avatar }}"></img>
+                        &nbsp;&nbsp;
+                        {{ display.user }}
+                    </td>
+                    {% if loop.index == 1 %}
+                        <td class="score gold-color">{{ display.score }}</td>
+                    {% elif loop.index == 2 %}
+                        <td class="score silver-color">{{ display.score }}</td>
+                    {% elif loop.index == 3 %}
+                        <td class="score meta-color">{{ display.score }}</td>
+                    {% else %}
+                        <td class="score">{{ display.score }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <p class="center-block" style="font-size: 0.9em; color: gray;text-align: center;">{{ update_time }} 秒前更新</p>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+    //寻找自己并高亮
+    /*
+    $(document).ready(function () {
+        var $table = $("table");
+        var $trArray = $table.find("tr").toArray();
+        for(var i=0;i<$trArray.length;i++){
+            var $tr = $($trArray[i]);
+            if($tr.html().indexOf("")!=-1){
+                $tr.addClass('success');
+            }
+        }
+    });*/
+    </script>
+{% endblock %}

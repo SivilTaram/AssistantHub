@@ -1,0 +1,319 @@
+/*
+ * -- BASE STYLES --
+ * Most of these are inherited from Base, but I want to change a few.
+ */
+
+html,
+body {
+    color: #333;
+    height: 100%;
+    width: 100%;
+    -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+    text-decoration: none !important;
+    color: #1b98f8;
+}
+
+
+/*
+ * -- LAYOUT STYLES --
+ * This layout consists of three main elements, `#nav-bar` (navigation bar), `#list` (email list), and `#main` (email content). All 3 elements are within `#layout`
+ */
+
+#layout {
+    height: 100%;
+}
+
+#layout,
+#nav-bar,
+#screen {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Make the navigation 100% width on phones */
+
+#nav-bar {
+    width: 100%;
+    height: 60px;
+    position: relative;
+    background: #4A75E6;
+    text-align: center;
+    -webkit-transition-duration: 0.25s;
+    transition-duration: 0.25s;
+}
+
+#main-part{
+    height:auto;
+}
+
+.search-form{
+    height: 40px;
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+/* Show the "Menu" button on phones */
+.search-form input {
+	outline: none;
+}
+.search-form input[type=search] {
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+	font-family: inherit;
+	font-size: 100%;
+}
+.search-form input::-webkit-search-decoration,
+.search-form input::-webkit-search-cancel-button {
+	display: none;
+}
+
+
+.search-form input[type=search] {
+	background: #ededed url(/static/imgs/search-icon.png) no-repeat 9px center;
+	border: solid 1px #ccc;
+	padding: 5px 16px 5px 32px;
+	width: 55px;
+    height:30px;
+	-webkit-border-radius: 10em;
+	-moz-border-radius: 10em;
+	border-radius: 10em;
+
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	transition: all .5s;
+}
+.search-form input[type=search]:focus {
+	width: 80%;
+	background-color: white;
+	border-color: #66CC75;
+
+	-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+	-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+	box-shadow: 0 0 5px rgba(109,207,246,.5);
+}
+
+
+.search-form input:-moz-placeholder {
+	color: #999;
+}
+.search-form input::-webkit-input-placeholder {
+	color: #999;
+}
+
+/* Nav toogle before open */
+
+.nav-toggle {
+    width: 60px;
+    height: 60px;
+    z-index: 2;
+    border-radius: 50%;
+    margin-left: 20px;
+    position: absolute;
+    cursor: pointer;
+    -webkit-transition-duration: 0.66s;
+    transition-duration: 0.66s;
+    -webkit-transition-timing-function: swing;
+    transition-timing-function: swing;
+}
+
+.nav-toggle:before {
+    width: 28px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #4A75E6;
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-transition-duration: 0.66s;
+    transition-duration: 0.66s;
+    -webkit-transition-timing-function: swing;
+    transition-timing-function: swing;
+}
+
+.nav-toggle .icon {
+    width: 40px;
+    height: 4px;
+    background-color: white;
+    border-radius: 2px;
+    position: absolute;
+    top: 30px;
+    left: 12px;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    transiting-timing-function: swing;
+}
+
+.nav-toggle .icon:before,
+.nav-toggle .icon:after {
+    width: 40px;
+    height: 4px;
+    background-color: white;
+    border-radius: 2px;
+    content: "";
+    position: absolute;
+    left: 0;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    transiting-timing-function: swing;
+}
+
+.nav-toggle .icon:before {
+    top: -8px;
+}
+
+.nav-toggle .icon:after {
+    top: 8px;
+}
+
+
+/* When "Menu" is clicked, the navbar should be 80% height */
+
+#nav-bar.active {
+    height: 100%;
+    -webkit-transition-duration: 0.25s;
+    transition-duration: 0.25s;
+}
+
+#nav-bar.active .search-form{
+    display: none;
+}
+
+/* Don't show the navigation items... */
+
+.nav-inner {
+    display: none;
+}
+
+
+/* ...until the "Menu" button is clicked */
+
+#nav-bar.active .nav-inner {
+    display: block;
+    padding: 5em 0;
+}
+
+#nav-bar.active .nav-toggle .icon:before {
+    -webkit-transform: translateY(8px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
+}
+
+#nav-bar.active .nav-toggle .icon:after {
+    -webkit-transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+#nav-bar.active .nav-toggle .icon {
+    width: 0;
+}
+
+
+/*
+ * -- NAV BAR STYLES --
+ * Styling the default .pure-menu to look a little more unique.
+ */
+
+#nav-bar .pure-menu {
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-size: 1em;
+    line-height: 2em;
+}
+
+#nav-bar .pure-menu-link:hover,
+#nav-bar .pure-menu-link:focus {
+    background: white;
+    color: #4A75E6;
+}
+
+#nav-bar .pure-menu-link {
+    color: #fff;
+}
+
+#nav-bar .pure-menu-item {
+    text-align: center;
+}
+
+#hover-window{
+    height: auto;
+    margin-bottom: 20px;
+}
+
+#hover-window .search-form {
+    width: auto;
+    z-index: 9;
+    display: none;
+    padding: 0 10px;
+}
+
+iframe{
+    box-sizing: border-box !important;
+}
+/*
+ * -- TABLET (AND UP) MEDIA QUERIES --
+ * On tablets and other medium-sized devices, we want to customize some
+ * of the mobile styles.
+ */
+
+@media (min-width: 70em) {
+    /* Move the layout over so we can fit the nav + list in on the left */
+    #layout {
+        padding-left: 150px;
+        /* "left col (nav + list)" width */
+        position: relative;
+    }
+    /* These are position:fixed; elements that will be in the left 500px of the screen */
+    #nav-bar {
+        margin-left: -150px;
+        /* "left col (nav + list)" width */
+        width: 150px;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        overflow: auto;
+    }
+    /* Show the menu items on the larger screen */
+    .nav-inner {
+        display: block;
+        padding: 2em 0;
+    }
+    /* Hide the "Menu" button on larger screens */
+    #nav-bar .nav-toggle {
+        display: none;
+    }
+
+    #nav-bar .search-form{
+        display: none;
+    }
+
+    #hover-window .search-form{
+        display: block;
+    }
+
+    .search-form input[type=search]:focus{
+        width: 60%;
+    }
+
+    #main-part{
+        height:auto;
+        border: none;
+        width: auto;
+        left:150px;
+        right:0;
+        bottom:0;
+        top:0;
+        overflow-y: hidden;
+        position: absolute;
+    }
+}
